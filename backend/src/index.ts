@@ -27,5 +27,7 @@ app.use("/", (req: Request, res: Response) => {
 
 //App listener
 app.listen(PORT, () => {
+    dbConn();
     console.log("Listening on port:", PORT);
+    
 });
