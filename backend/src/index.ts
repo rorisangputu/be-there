@@ -1,5 +1,16 @@
 import express, {Request, Response} from 'express';
 import cors from 'cors';
+import 'dotenv/config';
+import mongoose from 'mongoose';
+
+const dbConn = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_CONN as string);
+        console.log('Db Connected')
+    } catch (error) {
+        
+    }
+}
 
 const app = express();
 
