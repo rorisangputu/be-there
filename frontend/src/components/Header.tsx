@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
   return (
@@ -9,9 +10,8 @@ const Header = () => {
             <h1 className="font-bold text-2xl text-[#181917]">b/there</h1>
           </Link>
         </div>
-              <div className="flex flex-row gap-3 items-center">
-                  
-                  
+        <div className="flex flex-row gap-3 items-center">
+          <GiHamburgerMenu className="h-7 w-7 md:hidden" />
           <ul className="hidden md:flex flex-row gap-3">
             {links.map((link) => (
               <li key={link.url}>
