@@ -17,8 +17,9 @@ const Hero = () => {
               <button className="bg-[#fefae0] p-2">Search</button>
             </div>
           </div>
-          <div>
-            <p>Create An Event</p>
+          <div className="flex gap-2 items-center">
+            <FaCalendarPlus className="h-9 w-9 p-2 bg-[#fefae0]" />
+            <p className="text-lg">Create An Event</p>
           </div>
         </div>
       </div>
