@@ -20,9 +20,9 @@ const Header = () => {
             ))}
           </ul>
           <Link to={"/sign-in"}>
-            <span className="bg-[#fefae0] p-3 font-semibold text-md md:text-xl">
+            <button className="bg-[#fefae0] p-3 font-semibold text-md md:text-xl">
               Log In
-            </span>
+            </button>
           </Link>
         </div>
       </div>
