@@ -14,13 +14,15 @@ const Header = () => {
           <GiHamburgerMenu className="h-7 w-7 md:hidden" />
           <ul className="hidden md:flex flex-row gap-3">
             {links.map((link) => (
-              <li key={link.url}>
+              <li key={link.url} className="text-xl">
                 <Link to={link.url}>{link.title}</Link>
               </li>
             ))}
           </ul>
           <Link to={"/sign-in"}>
-            <span className="bg-[#fefae0] p-3 font-semibold">Log In</span>
+            <span className="bg-[#fefae0] p-3 font-semibold text-md md:text-xl">
+              Log In
+            </span>
           </Link>
         </div>
       </div>
