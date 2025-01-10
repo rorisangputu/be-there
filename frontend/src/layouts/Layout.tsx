@@ -1,15 +1,15 @@
 import Header from "../components/Header";
-import Hero from "../components/Hero";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div>
+    <div className="relative">
       <Header />
-      <Hero />
-      <div className="bg-white z-10">{children}</div>
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-50">
+        {children}
+      </div>
     </div>
   );
 };

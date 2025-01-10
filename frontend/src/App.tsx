@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/Layout";
+import Home from "./pages/Home";
 function App() {
   return (
     <div>
@@ -8,7 +9,7 @@ function App() {
           path="/"
           element={
             <Layout>
-              <p>Home Page</p>
+              <Home />
             </Layout>
           }
         />

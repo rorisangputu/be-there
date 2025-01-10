@@ -1,4 +1,5 @@
 import { FaCalendarPlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="w-full">
@@ -17,10 +18,12 @@ const Hero = () => {
               <button className="bg-[#fefae0] p-2">Search</button>
             </div>
           </div>
-          <div className="flex gap-2 items-center">
+          <Link to={"/create"} className="flex gap-2 items-center">
             <FaCalendarPlus className="h-9 w-9 p-2 bg-[#fefae0]" />
-            <p className="text-lg">Create An Event</p>
-          </div>
+            <p className="text-lg hover:underline cursor-pointer">
+              Create An Event
+            </p>
+          </Link>
         </div>
       </div>
     </div>

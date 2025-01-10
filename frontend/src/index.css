@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+body{
     background-color: #ccd5ae;
     font-family: "Rokkitt", serif;
     font-optical-sizing: auto;
