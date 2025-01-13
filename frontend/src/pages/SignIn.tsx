@@ -11,14 +11,14 @@ const SignIn = () => {
               email:
               <input
                 className="bg-gray-100 border-slate-500 border focus:outline-none"
-                type="text"
+                type="email"
               />
             </span>
             <span className="flex gap-2">
               Password:
               <input
                 className="bg-gray-100 border-slate-500 border focus:outline-none"
-                type="text"
+                type="password"
               />
             </span>
             <span className="flex justify-end">
