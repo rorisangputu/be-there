@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user.route'
+import authRoutes from './routes/auth.route'
 
 const dbConn = async () => {
     try {
@@ -27,6 +28,7 @@ const PORT = process.env.PORT || 3000;
 // });
 
 app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 //App listener
 app.listen(PORT, () => {
