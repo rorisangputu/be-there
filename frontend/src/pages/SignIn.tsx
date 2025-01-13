@@ -8,7 +8,7 @@ const SignIn = () => {
           <h1 className="text-center text-2xl">Log In</h1>
           <form className="flex flex-col gap-5">
             <span className="flex gap-2">
-              Username:
+              email:
               <input
                 className="bg-gray-100 border-slate-500 border focus:outline-none"
                 type="text"
