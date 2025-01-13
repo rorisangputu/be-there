@@ -41,7 +41,7 @@ const links = [
   },
   {
     title: "Profile",
-    url: "/rsvp",
+    url: "/profile",
   },
 ];
 
