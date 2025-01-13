@@ -2,6 +2,7 @@ import express, {Request, Response} from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
+import userRoutes from './routes/user.route'
 
 const dbConn = async () => {
     try {
@@ -21,9 +22,11 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-app.use("/", (req: Request, res: Response) => {
-    res.send({ message: "Helllooo oOkakaa" })
-});
+// app.use("/", (req: Request, res: Response) => {
+//     res.send({ message: "Helllooo oOkakaa" })
+// });
+
+app.use("/api/users", userRoutes);
 
 //App listener
 app.listen(PORT, () => {
