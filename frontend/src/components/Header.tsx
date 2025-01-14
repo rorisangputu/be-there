@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useAppContext } from "../contexts/AppContext";
+import SignOutButton from "./SignOutButton";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
@@ -26,11 +27,7 @@ const Header = () => {
               <Link to={"/profile"}>
                 <p className="text-xl">Profile</p>
               </Link>
-              <Link to={"/logout"}>
-                <button className="bg-[#fefae0] p-3 font-semibold text-md md:text-xl">
-                  Logout
-                </button>
-              </Link>
+              <SignOutButton />
             </>
           ) : (
             <Link to={"/sign-in"}>
