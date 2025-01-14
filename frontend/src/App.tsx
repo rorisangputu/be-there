@@ -3,7 +3,11 @@ import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
+import { useAppContext } from "./contexts/AppContext";
+import Profile from "./pages/Profile";
+
 function App() {
+  const { isLoggedIn } = useAppContext();
   return (
     <div>
       <Routes>
@@ -31,6 +35,19 @@ function App() {
             </Layout>
           }
         />
+
+        {isLoggedIn && (
+          <>
+            <Route
+              path="/profile"
+              element={
+                <Layout>
+                  <Profile />
+                </Layout>
+              }
+            />
+          </>
+        )}
         {/* CATCH ALL ROUTE */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
