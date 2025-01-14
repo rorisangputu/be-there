@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 
+export type SignInFormData = {
+  email: string;
+  password: string;
+};
+
 const SignIn = () => {
   return (
     <div className="w-full">
@@ -10,14 +15,14 @@ const SignIn = () => {
             <label className="flex flex-col gap-2 text-slate-500">
               Email:
               <input
-                className="bg-gray-100 border-slate-500 border focus:outline-none"
+                className="p-2 bg-gray-100 border-slate-500 border focus:outline-none"
                 type="email"
               />
             </label>
             <label className="flex flex-col gap-2 text-slate-500">
               Password:
               <input
-                className="bg-gray-100 border-slate-500 border focus:outline-none"
+                className="p-2 bg-gray-100 border-slate-500 border focus:outline-none"
                 type="password"
               />
             </label>
