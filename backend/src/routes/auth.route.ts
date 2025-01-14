@@ -11,4 +11,12 @@ router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
     return;
 });
 
+router.post("/logout", (req: Request, res: Response) => {
+    res.cookie("bethere_auth_token", "", {
+        expires: new Date(0),
+    });
+
+    res.status(200).send();
+});
+
 export default router;
