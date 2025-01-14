@@ -10,6 +10,22 @@ const router = Router();
 //     res.send({ message: "HELLLLOO from User route! " })
 // });
 
+router.get("/me", verifyToken, async (req: Request, res: Response) => {
+  const userId = req.userId;
+
+  try {
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      res.status(400).json({ message: "User not found" })
+      return;
+    }
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" })
+  }
+});
+
 router.post(
   "/register",
   [
