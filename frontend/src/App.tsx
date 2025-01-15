@@ -5,6 +5,8 @@ import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import { useAppContext } from "./contexts/AppContext";
 import Profile from "./pages/Profile";
+import Create from "./pages/Create";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -43,6 +45,22 @@ function App() {
               element={
                 <Layout>
                   <Profile />
+                </Layout>
+              }
+            />
+            <Route
+              path="/create"
+              element={
+                <Layout>
+                  <Create />
+                </Layout>
+              }
+            />
+            <Route
+              path="/edit-profile/:userId"
+              element={
+                <Layout>
+                  <EditProfile />
                 </Layout>
               }
             />
