@@ -11,5 +11,5 @@ export type EventType = {
     name: string;
     date: Date;
     location: string;
-    banner: string;
+    bannerPhoto: string;
 }
