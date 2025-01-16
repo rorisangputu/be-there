@@ -5,8 +5,8 @@ import { FormProvider, useForm } from "react-hook-form";
 export type EventFormData = {
   name: string;
   description: string;
-  date: Date;
-  time: Date;
+  date: string;
+  time: string;
   location: string;
   bannerPhoto: string;
 };
