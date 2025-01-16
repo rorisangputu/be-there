@@ -4,6 +4,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user.route'
 import authRoutes from './routes/auth.route'
+import myEventRoutes from './routes/my-event.route'
 import cookieParser from 'cookie-parser';
 
 const dbConn = async () => {
