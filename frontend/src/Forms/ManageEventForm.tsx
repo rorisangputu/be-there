@@ -19,14 +19,16 @@ type Props = {
 
 const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
   const formMethods = useForm<EventFormData>();
-  const { register, handleSubmit, reset } = formMethods;
-  
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = formMethods;
 
   useEffect(() => {
     reset(event);
   }, [event, reset]);
-
-  
 
   const onSubmit = handleSubmit((formDataJSON: EventFormData) => {
     const formData = new FormData();
@@ -48,17 +50,28 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <label htmlFor="" className="flex flex-col text-lg">
           Name:
-          <input type="text" className="border border-slate-500 w-fit p-2" />
+          <input
+            type="text"
+            id="name"
+            className="border border-slate-500 w-fit p-2"
+            {...register("name", { required: "This field is required" })}
+          />
+          {errors.name && (
+            <span className="text-red-700">{errors.name.message}</span>
+          )}
         </label>
         <label htmlFor="" className="flex flex-col text-lg">
           Description:
           <textarea
-            name=""
             className="border border-slate-500"
-            id=""
+            id="description"
             cols={10}
             rows={7}
-          ></textarea>
+            {...register("description", { required: "This field is required" })}
+          />
+          {errors.description && (
+            <span className="text-red-700">{errors.description.message}</span>
+          )}
         </label>
         <div className="flex flex-col md:flex-row gap-5">
           <label htmlFor="" className="flex flex-col text-lg">
@@ -66,27 +79,48 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
             <input
               type="date"
               className="border border-slate-500 w-fit p-2"
-              name=""
-              id=""
+              id="date"
+              {...register("date", { required: "This field is required" })}
             />
+            {errors.date && (
+              <span className="text-red-700">{errors.date.message}</span>
+            )}
           </label>
           <label htmlFor="" className="flex flex-col text-lg">
             Time:
             <input
               type="time"
               className="border border-slate-500 w-fit p-2"
-              name=""
-              id=""
+              id="time"
+              {...register("time", { required: "This field is required" })}
             />
+            {errors.time && (
+              <span className="text-red-700">{errors.time.message}</span>
+            )}
           </label>
         </div>
         <label htmlFor="" className="flex flex-col text-lg">
           Location:
-          <input type="text" className="border border-slate-500 w-fit p-2" />
+          <input
+            type="text"
+            className="border border-slate-500 w-fit p-2"
+            id="location"
+            {...register("location", { required: "This field is required" })}
+          />
+          {errors.location && (
+            <span className="text-red-700">{errors.location.message}</span>
+          )}
         </label>
         <label htmlFor="" className="flex flex-col text-lg">
           Event Photo:
-          <input type="file" className="border border-slate-500 w-fit p-2" />
+          <input
+            type="file"
+            className="border border-slate-500 w-fit p-2"
+            {...register("bannerPhoto", { required: "This field is required" })}
+          />
+          {errors.bannerPhoto && (
+            <span className="text-red-700">{errors.bannerPhoto.message}</span>
+          )}
         </label>
         <span className="flex justify-end my-5">
           <button type="submit" className="p-3 text-lg bg-[#181917] text-white">
