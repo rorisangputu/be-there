@@ -73,3 +73,16 @@ export const logout = async () => {
     }
 
 }
+
+export const addMyEvent = async (eventFormData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/my-events`, {
+        method: "POST",
+        credentials: "include",
+        body: eventFormData,
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to add event")
+    }
+    return response.json();
+}
