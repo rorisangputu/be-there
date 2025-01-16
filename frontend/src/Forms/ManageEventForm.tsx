@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { EventType } from "../../../backend/src/shared/types";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -61,6 +61,7 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     }
     console.log("Combined DateTime:", combinedDateTime);
     console.log("Form Data:", JSON.stringify(Object.fromEntries(formData)));
+    onSave(formData);
   });
 
   return (
@@ -149,8 +150,12 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
           )}
         </label>
         <span className="flex justify-end my-5">
-          <button type="submit" className="p-3 text-lg bg-[#181917] text-white">
-            Submit
+          <button
+            disabled={isLoading}
+            type="submit"
+            className="p-3 text-lg bg-[#181917] text-white disabled:bg-gray-400"
+          >
+            {isLoading ? "Saving..." : "Save"}
           </button>
         </span>
       </form>
