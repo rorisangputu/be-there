@@ -7,11 +7,11 @@ export type UserType = {
 };
 
 export type EventType = {
-    _id: string;
-    name: string;
-    description: string;
-    date: Date;
-    location: string;
-    bannerPhoto: string;
+   _id: string;
+  name: string;
+  description: string;
+  dateTime: Date; // Combined date and time
+  location: string;
+  bannerPhoto: string;
     
 }
