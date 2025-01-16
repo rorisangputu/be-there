@@ -24,6 +24,7 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     formState: { errors },
     handleSubmit,
     reset,
+    watch,
   } = formMethods;
 
   useEffect(() => {
@@ -47,11 +48,16 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     formData.append("description", formDataJSON.description);
     formData.append("dateTime", combinedDateTime.toISOString());
     formData.append("location", formDataJSON.location);
-    formData.append("bannerPhoto", formDataJSON.bannerPhoto);
+    // Handle banner photo
+    const fileInput = watch("bannerPhoto") as unknown as FileList;
+    if (fileInput && fileInput[0]) {
+      formData.append("bannerPhoto", fileInput[0]); // Append the file, not the FileList
+    }
 
     console.log("Combined DateTime:", combinedDateTime);
     console.log("Form Data:", JSON.stringify(Object.fromEntries(formData)));
   });
+
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -122,13 +128,14 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
           Event Photo:
           <input
             type="file"
+            accept="image/*"
             className="border border-slate-500 w-fit p-2"
             {...register("bannerPhoto", {
               required: "This field is required",
-              onChange: (e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  formMethods.setValue("bannerPhoto", file.name); // Or use a Blob/File if needed
+              validate: (bannerPhoto) => {
+                const totalLength = bannerPhoto.length; // for edit
+                if (totalLength === 0) {
+                  return "At least one image should be added";
                 }
               },
             })}
