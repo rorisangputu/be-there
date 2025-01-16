@@ -9,7 +9,9 @@ export type UserType = {
 export type EventType = {
     _id: string;
     name: string;
+    description: string;
     date: Date;
     location: string;
     bannerPhoto: string;
+    
 }
