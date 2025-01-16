@@ -17,6 +17,7 @@ const upload = multer({
 router.post('/', verifyToken,
     [
         body("name").notEmpty().withMessage("Name is required"),
+        body("description").notEmpty().withMessage("Description is required"),
         body("date").notEmpty().withMessage("Date is required"),
         body("location").notEmpty().withMessage("Location is required"),
     ],
