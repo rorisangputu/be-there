@@ -36,10 +36,14 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
       formData.append("eventId", event._id);
     }
 
+    // Combine date and time into a single Date object
+    const combinedDateTime = new Date(
+      `${formDataJSON.date.toString().split("T")[0]}T${formDataJSON.time}:00`
+    );
+
     formData.append("name", formDataJSON.name);
     formData.append("description", formDataJSON.description);
-    formData.append("date", formDataJSON.date.toString());
-    formData.append("time", formDataJSON.time.toString());
+    formData.append("dateTime", combinedDateTime.toISOString());
     formData.append("location", formDataJSON.location);
     formData.append("bannerPhoto", formDataJSON.bannerPhoto);
 
