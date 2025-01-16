@@ -47,7 +47,8 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     formData.append("location", formDataJSON.location);
     formData.append("bannerPhoto", formDataJSON.bannerPhoto);
 
-    console.log(JSON.stringify(formData));
+    console.log("Combined DateTime:", combinedDateTime);
+    console.log("Form Data:", JSON.stringify(Object.fromEntries(formData)));
   });
   return (
     <FormProvider {...formMethods}>
@@ -120,7 +121,15 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
           <input
             type="file"
             className="border border-slate-500 w-fit p-2"
-            {...register("bannerPhoto", { required: "This field is required" })}
+            {...register("bannerPhoto", {
+              required: "This field is required",
+              onChange: (e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  formMethods.setValue("bannerPhoto", file.name); // Or use a Blob/File if needed
+                }
+              },
+            })}
           />
           {errors.bannerPhoto && (
             <span className="text-red-700">{errors.bannerPhoto.message}</span>
