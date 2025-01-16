@@ -8,6 +8,7 @@ export type EventFormData = {
   date: string;
   time: string;
   location: string;
+  bannerPhotoFile: FileList;
   bannerPhoto: string;
 };
 
@@ -48,12 +49,16 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     formData.append("description", formDataJSON.description);
     formData.append("dateTime", combinedDateTime.toISOString());
     formData.append("location", formDataJSON.location);
-    // Handle banner photo
-    const fileInput = watch("bannerPhoto") as unknown as FileList;
-    if (fileInput && fileInput[0]) {
-      formData.append("bannerPhoto", fileInput[0]); // Append the file, not the FileList
+
+    const fileInput = watch("bannerPhotoFile");
+    if (fileInput && fileInput.length > 0) {
+      formData.append("bannerPhotoFile", fileInput[0]); // Extract the first file from FileList
     }
 
+    // Debugging logs
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
     console.log("Combined DateTime:", combinedDateTime);
     console.log("Form Data:", JSON.stringify(Object.fromEntries(formData)));
   });
@@ -130,11 +135,10 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
             type="file"
             accept="image/*"
             className="border border-slate-500 w-fit p-2"
-            {...register("bannerPhoto", {
+            {...register("bannerPhotoFile", {
               required: "This field is required",
               validate: (bannerPhoto) => {
-                const totalLength = bannerPhoto.length; // for edit
-                if (totalLength === 0) {
+                if (!bannerPhoto) {
                   return "At least one image should be added";
                 }
               },
