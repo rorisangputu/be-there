@@ -27,7 +27,9 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
   } = formMethods;
 
   useEffect(() => {
-    reset(event);
+    if (event) {
+      reset(event);
+    }
   }, [event, reset]);
 
   const onSubmit = handleSubmit((formDataJSON: EventFormData) => {
