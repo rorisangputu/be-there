@@ -19,11 +19,14 @@ type Props = {
 
 const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
   const formMethods = useForm<EventFormData>();
-  const { handleSubmit, reset } = formMethods;
+  const { register, handleSubmit, reset } = formMethods;
+  
 
   useEffect(() => {
     reset(event);
   }, [event, reset]);
+
+  
 
   const onSubmit = handleSubmit((formDataJSON: EventFormData) => {
     const formData = new FormData();
