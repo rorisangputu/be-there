@@ -10,9 +10,15 @@ const eventSchema = new Schema({
         type: String,
         required: true,
     },
-    date: {
+    dateTime: {
         type: Date,
         required: true,
+        validate: {
+            validator: (value: Date) => {
+                return value.getTime() > Date.now();
+            },
+            message: 'Event date and time must be in the future.',
+        },
     },
     location: {
         type: String,
