@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { EventType } from "../../../backend/src/shared/types";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 export type EventFormData = {
   name: string;
@@ -25,10 +25,24 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     reset(event);
   }, [event, reset]);
 
-  const
+  const onSubmit = handleSubmit((formDataJSON: EventFormData) => {
+    const formData = new FormData();
+    if (event) {
+      formData.append("eventId", event._id);
+    }
+
+    formData.append("name", formDataJSON.name);
+    formData.append("description", formDataJSON.description);
+    formData.append("date", formDataJSON.date.toString());
+    formData.append("time", formDataJSON.time.toString());
+    formData.append("location", formDataJSON.location);
+    formData.append("bannerPhoto", formDataJSON.bannerPhoto);
+
+    console.log(JSON.stringify(formData));
+  });
   return (
-    <div>
-      <form action="" className="flex flex-col gap-4">
+    <FormProvider {...formMethods}>
+      <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <label htmlFor="" className="flex flex-col text-lg">
           Name:
           <input type="text" className="border border-slate-500 w-fit p-2" />
@@ -77,7 +91,7 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
           </button>
         </span>
       </form>
-    </div>
+    </FormProvider>
   );
 };
 
