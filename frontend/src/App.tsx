@@ -7,6 +7,7 @@ import { useAppContext } from "./contexts/AppContext";
 import Profile from "./pages/Profile";
 import Create from "./pages/Create";
 import EditProfile from "./pages/EditProfile";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -34,6 +35,14 @@ function App() {
           element={
             <Layout>
               <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/event/:id"
+          element={
+            <Layout>
+              <EventDetails />
             </Layout>
           }
         />
