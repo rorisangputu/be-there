@@ -40,14 +40,21 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
       formData.append("eventId", event._id);
     }
 
-    // Combine date and time into a single Date object
-    const combinedDateTime = new Date(
-      `${formDataJSON.date.toString().split("T")[0]}T${formDataJSON.time}:00`
+    // Get the selected date and time
+    const selectedDate = formDataJSON.date;
+    const selectedTime = formDataJSON.time;
+
+    // Create a new Date object from the selected date and time
+    const combinedDateTime = new Date(`${selectedDate}T${selectedTime}:00`);
+
+    // Adjust the time to the local timezone (GMT+2 in your case)
+    const localDateTime = new Date(
+      combinedDateTime.getTime() - combinedDateTime.getTimezoneOffset() * 60000
     );
 
     formData.append("name", formDataJSON.name);
     formData.append("description", formDataJSON.description);
-    formData.append("dateTime", combinedDateTime.toISOString());
+    formData.append("dateTime", localDateTime.toISOString()); // Ensure this is in ISO format for your backend
     formData.append("location", formDataJSON.location);
 
     const fileInput = watch("bannerPhotoFile");
