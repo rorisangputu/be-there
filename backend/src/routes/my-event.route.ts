@@ -47,6 +47,17 @@ router.post('/', verifyToken,
     }
 );
 
+// api/my-event -- fetch events
+router.get("/", verifyToken, async (req: Request, res: Response) => {
+    try {
+        const events = await Event.find({ userId: req.userId });
+        res.json(events);
+
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching events" });
+    }
+});
+
 // Modify uploadImages to handle a single file
 async function uploadImages(bannerPhotoFile: Express.Multer.File) {
     const b64 = Buffer.from(bannerPhotoFile.buffer).toString("base64"); //converting image to base64 string
