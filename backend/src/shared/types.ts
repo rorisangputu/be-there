@@ -13,5 +13,5 @@ export type EventType = {
   dateTime: Date; // Combined date and time
   location: string;
   bannerPhoto: string;
-    
+  userId: string;
 }
