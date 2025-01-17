@@ -38,7 +38,16 @@ router.post('/', verifyToken,
             const event = new Event(newEvent);
             await event.save();
 
-            res.status(201).send(event);
+            // Generate a shareable URL (assuming you have a client-side route like /events/:id)
+            const eventUrl = `${req.protocol}://${req.get("host")}/events/${event._id}`;
+
+            // Send the response with event data and the URL
+            res.status(201).json({
+                success: true,
+                event,
+                eventUrl,
+            });
+
         } catch (error) {
             console.log("Error creating event", error);
             res.status(500).json({ message: "Something went wrong" });
