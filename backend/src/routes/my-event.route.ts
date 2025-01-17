@@ -21,9 +21,9 @@ router.post('/', verifyToken,
         body("dateTime").notEmpty().withMessage("Date is required"),
         body("location").notEmpty().withMessage("Location is required"),
     ],
-    upload.single("bannerPhoto"),
+    upload.single("bannerPhotoFile"),
     async (req: Request, res: Response) => {
-    console.log(req.body);
+    console.log(req.body, req.file);
 })
 
 
