@@ -4,6 +4,7 @@ import { verifyToken } from '../middleware/auth.middleware';
 import { body } from 'express-validator';
 import cloudinary from "cloudinary";
 import { EventType } from '../shared/types';
+import Event from '../models/event.model';
 
 const router = Router();
 
@@ -31,7 +32,10 @@ router.post('/', verifyToken,
 
         const bannerPhotoUrl = await uploadImages(bannerPhotoFile);
         newEvent.bannerPhoto = bannerPhotoUrl;
+        newEvent.userId = req.userId
 
+        const event = new Event(newEvent);
+        await event.save();
     }
 )
 
