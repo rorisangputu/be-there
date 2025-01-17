@@ -24,16 +24,17 @@ const Header = () => {
           </ul>
           {isLoggedIn ? (
             <>
-              <Link to={"/profile"}>
-                <p className="text-xl">Profile</p>
+              <Link to={"/profile"} className="text-xl">
+                Profile
               </Link>
               <SignOutButton />
             </>
           ) : (
-            <Link to={"/sign-in"}>
-              <button className="bg-[#fefae0] p-3 font-semibold text-md md:text-xl">
-                Log In
-              </button>
+            <Link
+              to={"/sign-in"}
+              className="bg-[#fefae0] p-3 font-semibold text-md md:text-xl"
+            >
+              Log In
             </Link>
           )}
         </div>
