@@ -39,7 +39,7 @@ router.post('/', verifyToken,
             await event.save();
 
             // Generate a shareable URL (assuming you have a client-side route like /events/:id)
-            const eventUrl = `${req.protocol}://${req.get("host")}/events/${event._id}`;
+            const eventUrl = `http://localhost:5173/events/${event._id}`;
 
             // Send the response with event data and the URL
             res.status(201).json({
