@@ -27,17 +27,25 @@ router.post('/', verifyToken,
     upload.single("bannerPhotoFile"),
     async (req: Request, res: Response) => {
         //console.log(req.body, req.file);
-        const bannerPhotoFile = req.file as Express.Multer.File;
-        const newEvent: EventType = req.body;
+        try {
+            const bannerPhotoFile = req.file as Express.Multer.File;
+            const newEvent: EventType = req.body;
 
-        const bannerPhotoUrl = await uploadImages(bannerPhotoFile);
-        newEvent.bannerPhoto = bannerPhotoUrl;
-        newEvent.userId = req.userId
+            const bannerPhotoUrl = await uploadImages(bannerPhotoFile);
+            newEvent.bannerPhoto = bannerPhotoUrl;
+            newEvent.userId = req.userId
 
-        const event = new Event(newEvent);
-        await event.save();
+            const event = new Event(newEvent);
+            await event.save();
+
+            res.status(201).send(event);
+        } catch (error) {
+            console.log("Error creating event", error);
+            res.status(500).json({ message: "Something went wrong" });
+        }
+        
     }
-)
+);
 
 // Modify uploadImages to handle a single file
 async function uploadImages(bannerPhotoFile: Express.Multer.File) {
