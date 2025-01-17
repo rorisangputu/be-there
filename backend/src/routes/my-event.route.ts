@@ -2,6 +2,8 @@ import { Router, Request, Response } from 'express';
 import multer from 'multer';
 import { verifyToken } from '../middleware/auth.middleware';
 import { body } from 'express-validator';
+import cloudinary from "cloudinary";
+import { EventType } from '../shared/types';
 
 const router = Router();
 
@@ -23,8 +25,22 @@ router.post('/', verifyToken,
     ],
     upload.single("bannerPhotoFile"),
     async (req: Request, res: Response) => {
-    console.log(req.body, req.file);
-})
+        //console.log(req.body, req.file);
+        const bannerPhotoFile = req.file as Express.Multer.File;
+        const newEvent: EventType = req.body;
 
+        const bannerPhotoUrl = await uploadImages(bannerPhotoFile);
+        newEvent.bannerPhoto = bannerPhotoUrl;
+
+    }
+)
+
+// Modify uploadImages to handle a single file
+async function uploadImages(bannerPhotoFile: Express.Multer.File) {
+    const b64 = Buffer.from(bannerPhotoFile.buffer).toString("base64"); //converting image to base64 string
+    let dataURI = "data:" + bannerPhotoFile.mimetype + ";base64," + b64; //creating a string that describes image
+    const res = await cloudinary.v2.uploader.upload(dataURI); //using cloudinary SDK to upload image
+    return res.url;  // Return the URL of the uploaded image
+};
 
 export default router;
