@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import { EventType } from '../shared/types';
 
 const eventSchema = new Schema({
+    userId: { type: String, required: true },
     name: {
         type: String,
         required: true,
