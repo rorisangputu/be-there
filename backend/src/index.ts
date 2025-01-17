@@ -7,6 +7,23 @@ import authRoutes from './routes/auth.route'
 import myEventRoutes from './routes/my-event.route'
 import cookieParser from 'cookie-parser';
 
+
+import { v2 as cloudinary } from 'cloudinary';
+
+const cloudinaryConn = async () => {
+    try {
+        cloudinary.config({
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET
+        });
+        console.log("Cloudinary Connected.")
+    } catch (error) {
+         console.error('Db Connection Error:', error);
+        process.exit(1); // Exit the process if cloudinary connection fails
+    }
+}
+
 const dbConn = async () => {
     try {
         await mongoose.connect(process.env.MONGO_CONN as string);
@@ -40,6 +57,7 @@ app.use("/api/my-events", myEventRoutes);
 //App listener
 app.listen(PORT, () => {
     dbConn();
+    cloudinaryConn();
     console.log("Listening on port:", PORT);
     
 });
