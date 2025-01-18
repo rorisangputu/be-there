@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAppContext } from "../contexts/AppContext";
+import { useLocation } from "react-router-dom";
+import { useQueryClient } from "react-query";
+import * as apiClient from "../apiClient";
 
 type RsvpProps = {
   eventId: string;
@@ -10,15 +14,19 @@ export type RsvpFormData = {
   email: string;
   guests: number;
   message?: string;
+  eventId: string;
 };
 
 const RsvpForm = ({ eventId }: RsvpProps) => {
-    
+  const { showToast } = useAppContext();
+  const queryClient = useQueryClient();
+  const location = useLocation();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<RsvpFormData>();
+
   return (
     <div className="w-full mx-auto bg-white p-6 shadow-md">
       <h3 className="text-xl font-bold mb-4">RSVP</h3>
