@@ -41,25 +41,6 @@ Welcome to **B/there**! This app allows users to create, share, and manage event
 
 ---
 
-## 📂 Folder Structure  
-
-```plaintext
-src  
-├── components  
-│   ├── EventCard.tsx   // Minimal event card with details, edit, and share buttons  
-│   ├── EventDetails.tsx   // Detailed view of a single event  
-│   ├── RSVPForm.tsx   // RSVP form for guest submissions  
-├── pages  
-│   ├── Create.tsx   // Page to create events  
-│   ├── Edit.tsx   // Page to edit existing events  
-│   ├── MyEvents.tsx   // Page displaying events created by the user  
-├── contexts  
-│   ├── AppContext.tsx   // Global state management (e.g., toasts)  
-├── apiClient.ts   // API calls for event-related operations  
-```
-
----
-
 ## ✨ Getting Started  
 
 ### Prerequisites:  
