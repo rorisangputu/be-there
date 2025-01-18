@@ -63,11 +63,11 @@ const ManageEventForm = ({ onSave, isLoading, event }: Props) => {
     }
 
     // Debugging logs
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-    console.log("Combined DateTime:", combinedDateTime);
-    console.log("Form Data:", JSON.stringify(Object.fromEntries(formData)));
+    // for (const [key, value] of formData.entries()) {
+    //   console.log(`${key}:`, value);
+    // }
+    // console.log("Combined DateTime:", combinedDateTime);
+    // console.log("Form Data:", JSON.stringify(Object.fromEntries(formData)));
     onSave(formData);
   });
 
