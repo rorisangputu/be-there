@@ -3,7 +3,6 @@ import { EventType } from "../../../backend/src/shared/types";
 
 type EventCardProps = {
   EventData: EventType;
-  onEdit: (eventId: string) => void; // Function for editing the event
 };
 
 const EventCard = ({ EventData }: EventCardProps) => {

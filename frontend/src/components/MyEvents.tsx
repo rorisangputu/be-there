@@ -15,7 +15,7 @@ const MyEvents = () => {
     return <span>No Events founds</span>;
   }
   return (
-    <div className="grid grid-cols-1 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
       {eventData?.map((EventData) => (
         <EventCard EventData={EventData} />
       ))}
