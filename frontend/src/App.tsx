@@ -39,7 +39,7 @@ function App() {
           }
         />
         <Route
-          path="/events/:id"
+          path="/events/:eventId"
           element={
             <Layout>
               <EventDetails />
