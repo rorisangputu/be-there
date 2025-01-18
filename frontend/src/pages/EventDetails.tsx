@@ -71,7 +71,7 @@ const EventDetails = () => {
             RSVP
           </h2>
           <div className="mt-4">
-            <RsvpForm />
+            <RsvpForm eventId={eventData._id} />
           </div>
         </div>
       </div>
