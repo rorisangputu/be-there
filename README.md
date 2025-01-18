@@ -104,7 +104,7 @@ Welcome to **B/there**! This app allows users to create, share, and manage event
 
 ## 👩‍💻 Contributors  
 
-- **Rorisang Putu** - Frontend Developer & Project Creator  
+- **Rorisang Putu** - Software Developer & Project Creator  
 
 ---
 
