@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import * as apiClient from "../apiClient";
+import RsvpForm from "../Forms/RSVPForm";
 
 const EventDetails = () => {
   const { eventId } = useParams();
@@ -69,7 +70,9 @@ const EventDetails = () => {
           <h2 className="text-2xl font-bold" id="rsvp">
             RSVP
           </h2>
-          <div className="mt-4">{/* Add RSVP form or content here */}</div>
+          <div className="mt-4">
+            <RsvpForm />
+          </div>
         </div>
       </div>
     </div>
