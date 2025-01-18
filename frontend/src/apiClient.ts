@@ -1,6 +1,7 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 import { EventType, UserType }  from '../../backend/src/shared/types'
+import { RsvpFormData } from "./Forms/RSVPForm";
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -107,4 +108,19 @@ export const getEventById = async (eventId: string): Promise<EventType> => {
     }
     
     return response.json();
+}
+
+export const createRsvp = async (formData: RsvpFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/events/${formData.eventId}/rsvp`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+          body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+        throw new Error("Error booking room");
+    }
 }
