@@ -44,7 +44,7 @@ const EventDetails = () => {
             <img
               src={eventData.bannerPhoto}
               alt={eventData.name}
-              className="w-full h-80 object-cover rounded-md shadow-md"
+              className="w-full h-80 object-cover shadow-md"
             />
           </div>
           {/* Event Details */}
@@ -56,7 +56,7 @@ const EventDetails = () => {
             <p className="text-gray-800">Venue: {eventData.location}</p>
             <button
               onClick={scrollToRsvp}
-              className="bg-[#181917] text-white uppercase p-3 my-5 w-fit rounded-md shadow-md hover:bg-[#333333] transition-colors"
+              className="bg-[#181917] text-white uppercase p-3 my-5 w-fit shadow-md hover:bg-[#333333] transition-colors"
             >
               RSVP
             </button>
