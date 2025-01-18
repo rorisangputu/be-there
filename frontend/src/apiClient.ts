@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-import { UserType }  from '../../backend/src/shared/types'
+import { EventType, UserType }  from '../../backend/src/shared/types'
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -85,4 +85,16 @@ export const addMyEvent = async (eventFormData: FormData) => {
         throw new Error("Failed to add event")
     }
     return response.json();
+}
+
+export const getMyEvents = async (): Promise<EventType[]> => {
+    const res = await fetch(`${API_BASE_URL}/api/my-events`, {
+        credentials: "include"
+    });
+
+    if (!res.ok) {
+        throw new Error("Error fetching Events");
+    }
+
+    return res.json();
 }
