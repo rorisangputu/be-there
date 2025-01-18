@@ -16,8 +16,8 @@ const MyEvents = () => {
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-      {eventData?.map((EventData) => (
-        <EventCard EventData={EventData} />
+      {eventData?.map((EventData, i) => (
+        <EventCard key={i} EventData={EventData} />
       ))}
     </div>
   );
