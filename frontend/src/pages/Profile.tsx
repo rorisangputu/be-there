@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import * as apiClient from "../apiClient";
 import { Link } from "react-router-dom";
+import MyEvents from "../components/MyEvents";
 
 const Profile = () => {
   const { data: currentUser } = useQuery(
@@ -29,7 +30,7 @@ const Profile = () => {
 
         <hr className="h-[2px] border-none"></hr>
 
-        <div className="py-5">
+        <div className="py-5 flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-semibold">My Events</h2>
             <Link
@@ -39,6 +40,7 @@ const Profile = () => {
               Create Event
             </Link>
           </div>
+          <MyEvents />
         </div>
       </div>
     </div>
