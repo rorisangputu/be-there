@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import userRoutes from './routes/user.route'
 import authRoutes from './routes/auth.route'
 import myEventRoutes from './routes/my-event.route'
+import eventRoutes from './routes/events.route'
 import cookieParser from 'cookie-parser';
 
 
@@ -53,6 +54,7 @@ const PORT = process.env.PORT || 3000;
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/my-events", myEventRoutes);
+app.use("/api/events", eventRoutes)
 
 //App listener
 app.listen(PORT, () => {
