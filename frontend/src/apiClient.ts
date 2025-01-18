@@ -98,3 +98,13 @@ export const getMyEvents = async (): Promise<EventType[]> => {
 
     return res.json();
 }
+
+export const getEventById = async (eventId: string): Promise<EventType> => {
+    const response = await fetch(`${API_BASE_URL}/api/events/${eventId}`);
+
+    if (!response.ok) {
+       throw new Error("Error fetching event"); 
+    }
+    
+    return response.json();
+}
