@@ -89,7 +89,7 @@ const EventDetails = () => {
           <>
             <div className="w-full my-10">
               <div className="bg-white flex flex-col justify-center items-center py-10">
-                <p className="text-xl">You're not logged in.</p>
+                <p className="text-xl">Log In/Sign Up to RSVP.</p>
                 <div className="flex gap-5 my-5">
                   <button
                     className="text-lg cursor-pointer hover:text-slate-500"
