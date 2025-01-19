@@ -20,7 +20,7 @@ export type RsvpFormData = {
 
 const RsvpForm = ({ eventId }: RsvpProps) => {
   const { showToast } = useAppContext();
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const location = useLocation();
   const {
     register,
@@ -34,6 +34,7 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
         message: "RSVP Sent!",
         type: "SUCCESS",
       });
+      setSuccess(true);
     },
     onError: async (error: Error) => {
       showToast({ message: error.message, type: "ERROR" });
