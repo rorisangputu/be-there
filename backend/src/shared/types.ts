@@ -14,6 +14,7 @@ export type EventType = {
   location: string;
   bannerPhoto: string;
   userId: string;
+  rsvps: RsvpType[];
 }
 
 export type RsvpType = {

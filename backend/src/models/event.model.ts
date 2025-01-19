@@ -35,7 +35,8 @@ const eventSchema = new Schema<EventType>({
     bannerPhoto: {
         type: String,
         required: true
-    }
+    },
+    rsvps: [rsvpSchema],
 }, { timestamps: true });
 
 const Event = mongoose.model<EventType>("Event", eventSchema);
