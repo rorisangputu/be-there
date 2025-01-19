@@ -1,9 +1,13 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import * as apiClient from "../apiClient";
 import RsvpForm from "../Forms/RSVPForm";
+import { useAppContext } from "../contexts/AppContext";
 
 const EventDetails = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isLoggedIn } = useAppContext();
   const { eventId } = useParams();
   const { data: eventData } = useQuery(
     "getEventById",
@@ -32,6 +36,13 @@ const EventDetails = () => {
     if (rsvpSection) {
       rsvpSection.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const onSignInClick = () => {
+    navigate("/sign-in", { state: { from: location } });
+  };
+  const onSignUpClick = () => {
+    navigate("/register", { state: { from: location } });
   };
 
   return (
@@ -65,15 +76,39 @@ const EventDetails = () => {
 
         <hr className="h-[2px] border-none" />
 
-        {/* RSVP Section */}
-        <div className="py-5">
-          <h2 className="text-2xl font-bold" id="rsvp">
-            RSVP
-          </h2>
-          <div className="mt-4">
-            <RsvpForm eventId={eventData._id} />
-          </div>
-        </div>
+        {isLoggedIn ? (
+          <>
+            {/* RSVP Section */}
+            <div className="py-5">
+              <div className="mt-4">
+                <RsvpForm eventId={eventData._id} />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="w-full my-10">
+              <div className="bg-white flex flex-col justify-center items-center py-10">
+                <p className="text-xl">You're not logged in.</p>
+                <div className="flex gap-5 my-5">
+                  <button
+                    className="text-lg cursor-pointer hover:text-slate-500"
+                    onClick={() => onSignInClick()}
+                  >
+                    Sign In
+                  </button>
+                  <span>|</span>
+                  <button
+                    className="text-lg cursor-pointer hover:text-slate-500"
+                    onClick={() => onSignUpClick()}
+                  >
+                    Create Account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
