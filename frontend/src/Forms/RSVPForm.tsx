@@ -21,7 +21,7 @@ export type RsvpFormData = {
 const RsvpForm = ({ eventId }: RsvpProps) => {
   const { showToast } = useAppContext();
   const [success, setSuccess] = useState(false);
-  const location = useLocation();
+
   const {
     register,
     formState: { errors },

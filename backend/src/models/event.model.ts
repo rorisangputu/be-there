@@ -1,7 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
-import { EventType } from '../shared/types';
+import { EventType, RsvpType } from '../shared/types';
 
-const eventSchema = new Schema({
+const rsvpSchema = new Schema<RsvpType>({
+    userId: { type: String, required: true },
+    guestName: { type: String, required: true },
+    guestEmail: { type: String, required: true }
+});
+
+
+const eventSchema = new Schema<EventType>({
     userId: { type: String, required: true },
     name: {
         type: String,
