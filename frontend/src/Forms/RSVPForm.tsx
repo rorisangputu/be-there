@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../contexts/AppContext";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useMutation } from "react-query";
 import * as apiClient from "../apiClient";
 import { FaCheckCircle } from "react-icons/fa";
@@ -50,11 +50,14 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
       {/* Name */}
       {success ? (
         <>
-          <div className="">
+          <div className="flex flex-col justify-center items-center gap-4">
             <span className="flex flex-col justify-center items-center gap-3 text-xl">
               <FaCheckCircle className="text-green-500 w-6 h-6" />
               RSVP Successful!
             </span>
+            <Link to={"/"} className="underline">
+              Go Home
+            </Link>
           </div>
         </>
       ) : (
