@@ -15,3 +15,10 @@ export type EventType = {
   bannerPhoto: string;
   userId: string;
 }
+
+export type RsvpType = {
+  _id: string;
+  guestName: string;
+  guestEmail: string;
+  userId: string
+}
