@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../contexts/AppContext";
 import { useLocation } from "react-router-dom";
-import { useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import * as apiClient from "../apiClient";
 
 type RsvpProps = {
@@ -19,7 +19,7 @@ export type RsvpFormData = {
 
 const RsvpForm = ({ eventId }: RsvpProps) => {
   const { showToast } = useAppContext();
-  const queryClient = useQueryClient();
+
   const location = useLocation();
   const {
     register,
@@ -27,11 +27,31 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
     handleSubmit,
   } = useForm<RsvpFormData>();
 
+  const mutation = useMutation(apiClient.createRsvp, {
+    onSuccess: async () => {
+      showToast({
+        message: "RSVP Sent!",
+        type: "SUCCESS",
+      });
+    },
+    onError: async (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
+    },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    mutation.mutate(data);
+  });
+
   return (
     <div className="w-full mx-auto bg-white p-6 shadow-md">
       <h3 className="text-xl font-bold mb-4">RSVP</h3>
       {/* Name */}
-      <form className="max-w-[40%] flex flex-col gap-4" action="">
+      <form
+        onSubmit={onSubmit}
+        className="max-w-[40%] flex flex-col gap-4"
+        action=""
+      >
         <label htmlFor="" className="flex flex-col text-lg">
           Name:
           <input
@@ -57,10 +77,6 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
             <span className="text-red-700">{errors.email.message}</span>
           )}
         </label>
-        {/* Guests */}
-
-        {/* Message */}
-
         {/* Submit Button */}
         <button
           type="submit"
