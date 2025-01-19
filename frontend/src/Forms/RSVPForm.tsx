@@ -11,10 +11,8 @@ type RsvpProps = {
 };
 
 export type RsvpFormData = {
-  name: string;
-  email: string;
-  guests: number;
-  message?: string;
+  guestName: string;
+  guestEmail: string;
   eventId: string;
 };
 
@@ -71,12 +69,12 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
             Name:
             <input
               type="text"
-              id="name"
+              id="guestName"
               className="p-1 border bg-gray-100 border-slate-600 focus:outline-none"
-              {...register("name", { required: "This field is required" })}
+              {...register("guestName", { required: "This field is required" })}
             />
-            {errors.name && (
-              <span className="text-red-700">{errors.name.message}</span>
+            {errors.guestName && (
+              <span className="text-red-700">{errors.guestName.message}</span>
             )}
           </label>
           {/* Email */}
@@ -84,12 +82,14 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
             Email:
             <input
               type="text"
-              id="email"
+              id="guestEmail"
               className="p-1 border bg-gray-100 border-slate-600 focus:outline-none"
-              {...register("email", { required: "This field is required" })}
+              {...register("guestEmail", {
+                required: "This field is required",
+              })}
             />
-            {errors.email && (
-              <span className="text-red-700">{errors.email.message}</span>
+            {errors.guestEmail && (
+              <span className="text-red-700">{errors.guestEmail.message}</span>
             )}
           </label>
           {/* Submit Button */}
