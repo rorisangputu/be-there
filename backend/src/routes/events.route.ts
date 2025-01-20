@@ -32,16 +32,27 @@ router.post('/:id/rsvp', verifyToken,
     ],
     async (req: Request, res: Response) => {
         console.log(req.body, req.params.id)
-        // try {
-        //     const newRsvp: RsvpType = {
-        //         ...req.body,
-        //         userId: req.userId
-        //     };
+        try {
+            const newRsvp: RsvpType = {
+                ...req.body,
+                userId: req.userId
+            };
 
-        //     const event = await Event.findByIdAndUpdate({_id: req.params.id})
-        // } catch (error) {
-            
-        // }
+            const event = await Event.findByIdAndUpdate({ _id: req.params.id }, {
+                $push: { rsvps: newRsvp }
+            });
+
+            if (!event) {
+                res.status(400).json({ message: "Event not found" })
+                return;
+            }
+
+            await event.save();
+            res.status(200).send(event);
+        } catch (error) {
+            console.log("Error:", error);
+      return res.status(500).json({ message: "Something went wrong" });
+        }
     }
 )
 
