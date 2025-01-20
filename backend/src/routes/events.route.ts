@@ -51,7 +51,8 @@ router.post('/:id/rsvp', verifyToken,
             res.status(200).send(event);
         } catch (error) {
             console.log("Error:", error);
-      return res.status(500).json({ message: "Something went wrong" });
+            res.status(500).json({ message: "Something went wrong" });
+            return;
         }
     }
 )
