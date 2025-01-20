@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { body, param, validationResult } from 'express-validator';
 import Event from '../models/event.model';
 import { verifyToken } from '../middleware/auth.middleware';
+import { RsvpType } from '../shared/types';
 
 const router = Router();
 
@@ -30,7 +31,17 @@ router.post('/:id/rsvp', verifyToken,
         body("guestEmail").notEmpty().withMessage("Email is required"),
     ],
     async (req: Request, res: Response) => {
-        console.log(req.body);
+        console.log(req.body, req.params.id)
+        // try {
+        //     const newRsvp: RsvpType = {
+        //         ...req.body,
+        //         userId: req.userId
+        //     };
+
+        //     const event = await Event.findByIdAndUpdate({_id: req.params.id})
+        // } catch (error) {
+            
+        // }
     }
 )
 
