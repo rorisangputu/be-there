@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-import { EventType, UserType }  from '../../backend/src/shared/types'
+import { EventType, RsvpType, UserType }  from '../../backend/src/shared/types'
 import { RsvpFormData } from "./Forms/RSVPForm";
 
 
@@ -117,10 +117,20 @@ export const createRsvp = async (formData: RsvpFormData) => {
             "Content-Type": "application/json",
         },
         credentials: "include",
-          body: JSON.stringify(formData)
+        body: JSON.stringify(formData)
     });
 
     if (!response.ok) {
-        throw new Error("Error booking room");
+        throw new Error("Error creating rsvp");
     }
+};
+
+export const checkRsvp = async (eventId: string): Promise<RsvpType> => {
+    const response = await fetch(`${API_BASE_URL}/api/events/${eventId}/rsvp-status`);
+
+    if (!response.ok) {
+        throw new Error("Error fetching rsvp data");
+    }
+
+    return response.json();
 }
