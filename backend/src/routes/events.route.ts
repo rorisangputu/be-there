@@ -25,11 +25,29 @@ router.get('/:id', [param("id").notEmpty().withMessage("Event Id is required")],
     }
 );
 
-router.get('/:id/rsvp-status', verifyToken, async (req: Request, res: Response) => {
+router.get('/:id/rsvp-status',
+    [param("id").notEmpty().withMessage("Event Id is required")],
+    verifyToken,
+    async (req: Request, res: Response) => {
+
     const { id } = req.params;
     const userId = req.userId;
 
-    console.log("Event Id:", id, "user", userId)
+        //console.log("Event Id:", id, "user", userId)
+    try {
+        const event = await Event.findOne({ _id: id, 'rsvps.userId': userId.toString() });
+        if (event) {
+            res.status(200).json({ rsvpExists: true })
+            return;
+        } else {
+            res.status(200).json({ rsvpExists: false })
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+    }
 })
 
 router.post('/:id/rsvp', verifyToken,
