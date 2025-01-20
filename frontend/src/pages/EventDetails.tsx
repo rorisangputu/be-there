@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import * as apiClient from "../apiClient";
 import RsvpForm from "../Forms/RSVPForm";
 import { useAppContext } from "../contexts/AppContext";
@@ -15,6 +15,10 @@ const EventDetails = () => {
     {
       enabled: !!eventId, // Don't call API if eventId doesn't exist
     }
+  );
+  const { data: currentUser } = useQuery(
+    "fetchCurrentUser",
+    apiClient.fetchCurrentUser
   );
 
   if (!eventData) {
@@ -81,7 +85,7 @@ const EventDetails = () => {
             {/* RSVP Section */}
             <div className="py-5">
               <div className="mt-4">
-                <RsvpForm eventId={eventData._id} />
+                <RsvpForm currentUser={currentUser} eventId={eventData._id} />
               </div>
             </div>
           </>
