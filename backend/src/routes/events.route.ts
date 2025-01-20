@@ -25,10 +25,18 @@ router.get('/:id', [param("id").notEmpty().withMessage("Event Id is required")],
     }
 );
 
+router.get('/:id/rsvp-status', verifyToken, async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const userId = req.userId;
+
+    console.log("Event Id:", id, "user", userId)
+})
+
 router.post('/:id/rsvp', verifyToken,
     [
         body("guestName").notEmpty().withMessage("Name is required"),
         body("guestEmail").notEmpty().withMessage("Email is required"),
+        param("eventId").notEmpty().withMessage("Event Id is required")
     ],
     async (req: Request, res: Response) => {
         console.log(req.body, req.params.id)
@@ -56,5 +64,7 @@ router.post('/:id/rsvp', verifyToken,
         }
     }
 )
+
+
 
 export default router;
