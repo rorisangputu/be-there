@@ -23,7 +23,7 @@ const RsvpForm = ({ eventId, currentUser }: RsvpProps) => {
   const [success, setSuccess] = useState(false);
 
   const { data: rsvpExists } = useQuery(
-    "checkRsvp",
+    ["checkRsvp", eventId],
     () => apiClient.checkRsvp(eventId as string),
     {
       enabled: !!eventId, // Don't call API if eventId doesn't exist
@@ -61,7 +61,7 @@ const RsvpForm = ({ eventId, currentUser }: RsvpProps) => {
     <div className="w-full mx-auto bg-white p-6 shadow-md">
       <h3 className="text-xl font-bold mb-4">RSVP</h3>
       {/* Name */}
-      {success ? (
+      {success || rsvpExists ? (
         <>
           <div className="flex flex-col justify-center items-center gap-4">
             <span className="flex flex-col justify-center items-center gap-3 text-xl">
