@@ -33,7 +33,7 @@ router.get('/:id/rsvp-status',
     const { id } = req.params;
     const userId = req.userId;
 
-    console.log("Event Id:", id, "user", userId)
+    //console.log("Event Id:", id, "user", userId)
     try {
         const event = await Event.findOne({ _id: id, 'rsvps.userId': userId.toString() });
         if (event) {
@@ -57,7 +57,7 @@ router.post('/:id/rsvp', verifyToken,
         param("eventId").notEmpty().withMessage("Event Id is required")
     ],
     async (req: Request, res: Response) => {
-        console.log(req.body, req.params.id)
+        //console.log(req.body, req.params.id)
         try {
             const newRsvp: RsvpType = {
                 ...req.body,

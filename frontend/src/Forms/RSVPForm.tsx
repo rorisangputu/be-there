@@ -30,7 +30,7 @@ const RsvpForm = ({ eventId, currentUser }: RsvpProps) => {
     }
   );
 
-  console.log(rsvpExists);
+  //console.log(rsvpExists);
 
   const { handleSubmit } = useForm<RsvpFormData>({
     defaultValues: {

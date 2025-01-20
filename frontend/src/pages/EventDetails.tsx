@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import * as apiClient from "../apiClient";
 import RsvpForm from "../Forms/RSVPForm";
 import { useAppContext } from "../contexts/AppContext";
@@ -69,18 +69,33 @@ const EventDetails = () => {
             <span className="text-gray-800">Date: {date}</span>
             <span className="text-gray-800">Time: {time}</span>
             <p className="text-gray-800">Venue: {eventData.location}</p>
-            <button
-              onClick={scrollToRsvp}
-              className="bg-[#181917] text-white uppercase p-3 my-5 w-fit shadow-md hover:bg-[#333333] transition-colors"
-            >
-              RSVP
-            </button>
+            {currentUser?._id === eventData.userId ? (
+              <>
+                <Link
+                  className="bg-[#181917] text-white uppercase p-3 my-5 w-fit shadow-md hover:bg-[#333333] transition-colors"
+                  to={"/edit-event"}
+                >
+                  Edit
+                </Link>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={scrollToRsvp}
+                  className="bg-[#181917] text-white uppercase p-3 my-5 w-fit shadow-md hover:bg-[#333333] transition-colors"
+                >
+                  RSVP
+                </button>
+              </>
+            )}
           </div>
         </div>
 
         <hr className="h-[2px] border-none" />
 
-        {isLoggedIn ? (
+        {currentUser?._id === eventData.userId ? (
+          <></>
+        ) : isLoggedIn ? (
           <>
             {/* RSVP Section */}
             <div className="py-5">
