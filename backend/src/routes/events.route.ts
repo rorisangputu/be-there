@@ -33,7 +33,7 @@ router.get('/:id/rsvp-status',
     const { id } = req.params;
     const userId = req.userId;
 
-        //console.log("Event Id:", id, "user", userId)
+    console.log("Event Id:", id, "user", userId)
     try {
         const event = await Event.findOne({ _id: id, 'rsvps.userId': userId.toString() });
         if (event) {
