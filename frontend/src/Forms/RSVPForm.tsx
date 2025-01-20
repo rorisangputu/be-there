@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../contexts/AppContext";
 import { Link } from "react-router-dom";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import * as apiClient from "../apiClient";
 import { FaCheckCircle } from "react-icons/fa";
 import { UserType } from "../../../backend/src/shared/types";
@@ -21,6 +21,16 @@ export type RsvpFormData = {
 const RsvpForm = ({ eventId, currentUser }: RsvpProps) => {
   const { showToast } = useAppContext();
   const [success, setSuccess] = useState(false);
+
+  const { data: rsvpExists } = useQuery(
+    "checkRsvp",
+    () => apiClient.checkRsvp(eventId as string),
+    {
+      enabled: !!eventId, // Don't call API if eventId doesn't exist
+    }
+  );
+
+  console.log(rsvpExists);
 
   const { handleSubmit } = useForm<RsvpFormData>({
     defaultValues: {
