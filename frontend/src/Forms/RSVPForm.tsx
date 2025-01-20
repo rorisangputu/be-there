@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../contexts/AppContext";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "react-query";
 import * as apiClient from "../apiClient";
 import { FaCheckCircle } from "react-icons/fa";
+import { UserType } from "../../../backend/src/shared/types";
 
 type RsvpProps = {
   eventId: string;
+  currentUser: UserType | undefined;
 };
 
 export type RsvpFormData = {
@@ -16,15 +18,17 @@ export type RsvpFormData = {
   eventId: string;
 };
 
-const RsvpForm = ({ eventId }: RsvpProps) => {
+const RsvpForm = ({ eventId, currentUser }: RsvpProps) => {
   const { showToast } = useAppContext();
   const [success, setSuccess] = useState(false);
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<RsvpFormData>();
+  const { handleSubmit } = useForm<RsvpFormData>({
+    defaultValues: {
+      guestName: currentUser?.firstName,
+      guestEmail: currentUser?.email,
+      eventId: eventId,
+    },
+  });
 
   const mutation = useMutation(apiClient.createRsvp, {
     onSuccess: async () => {
@@ -65,33 +69,6 @@ const RsvpForm = ({ eventId }: RsvpProps) => {
           className="max-w-[40%] flex flex-col gap-4"
           action=""
         >
-          <label htmlFor="" className="flex flex-col text-lg">
-            Name:
-            <input
-              type="text"
-              id="guestName"
-              className="p-1 border bg-gray-100 border-slate-600 focus:outline-none"
-              {...register("guestName", { required: "This field is required" })}
-            />
-            {errors.guestName && (
-              <span className="text-red-700">{errors.guestName.message}</span>
-            )}
-          </label>
-          {/* Email */}
-          <label htmlFor="" className="flex flex-col text-lg">
-            Email:
-            <input
-              type="text"
-              id="guestEmail"
-              className="p-1 border bg-gray-100 border-slate-600 focus:outline-none"
-              {...register("guestEmail", {
-                required: "This field is required",
-              })}
-            />
-            {errors.guestEmail && (
-              <span className="text-red-700">{errors.guestEmail.message}</span>
-            )}
-          </label>
           {/* Submit Button */}
           <button
             type="submit"
