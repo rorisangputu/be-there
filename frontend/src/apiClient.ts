@@ -126,7 +126,9 @@ export const createRsvp = async (formData: RsvpFormData) => {
 };
 
 export const checkRsvp = async (eventId: string): Promise<RsvpType> => {
-    const response = await fetch(`${API_BASE_URL}/api/events/${eventId}/rsvp-status`);
+    const response = await fetch(`${API_BASE_URL}/api/events/${eventId}/rsvp-status`, {
+        credentials: "include",
+    });
 
     if (!response.ok) {
         throw new Error("Error fetching rsvp data");
