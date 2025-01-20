@@ -66,7 +66,7 @@ const RsvpForm = ({ eventId, currentUser }: RsvpProps) => {
           <div className="flex flex-col justify-center items-center gap-4">
             <span className="flex flex-col justify-center items-center gap-3 text-xl">
               <FaCheckCircle className="text-green-500 w-6 h-6" />
-              RSVP Successful!
+              You have RSVP'd!
             </span>
             <Link to={"/"} className="underline">
               Go Home
